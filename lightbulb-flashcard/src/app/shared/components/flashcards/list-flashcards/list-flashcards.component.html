@@ -1,0 +1,12 @@
+<ion-card *ngFor="let item of list">
+  <ion-item
+  [routerLink]="['../flashcards',
+  {id: item.id}]">
+    <ion-label>
+      {{item.title}}
+    </ion-label>
+    <ion-badge slot="end" color="light">
+      {{item.data.length}}
+    </ion-badge>
+  </ion-item>
+</ion-card>

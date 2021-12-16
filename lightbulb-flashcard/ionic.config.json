@@ -1,0 +1,7 @@
+{
+  "name": "lightbulb-flashcard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

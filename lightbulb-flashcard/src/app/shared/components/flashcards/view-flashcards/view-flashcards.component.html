@@ -1,0 +1,15 @@
+<ion-card class="ion-text-center" *ngIf="flashcards">
+  <ion-item>
+    <ion-badge color="light">
+      {{flashcards.access ? "Public" : "Private"}}
+    </ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      {{flashcards.title}}
+    </ion-label>
+    <ion-badge slot="end" color="light">
+      {{getLearnedLenth(flashcards.data) | json}} / {{flashcards.data.length}}
+    </ion-badge>
+  </ion-item>
+</ion-card>

@@ -1,0 +1,15 @@
+<ion-card
+  *ngFor="let card of data">
+  <ion-item>
+    <ion-label
+      [routerLink]="['../flashcards',
+      {id: card}]">
+      {{card.question}}
+    </ion-label>
+    <ion-icon
+    slot="end"
+    name="{{card.learn ? 'checkmark-circle' : 'ellipse-outline'}}"
+    color="{{card.learn ? 'primary' : 'dark'}}">
+    </ion-icon>
+  </ion-item>
+</ion-card>
