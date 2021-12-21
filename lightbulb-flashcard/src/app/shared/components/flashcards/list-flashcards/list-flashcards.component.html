@@ -3,9 +3,9 @@
     <ion-item-sliding #slidingItem>
       <ion-item [routerLink]="['../flashcards', {id: item.id}]">
         <h2 style="margin: 10px 20px 10px 0px">{{item.icon}}</h2>
-        <ion-label>
+        <ion-text>
           {{item.title}}
-        </ion-label>
+        </ion-text>
         <ion-badge slot="end" color="light">
           {{item.data.length}}
         </ion-badge>

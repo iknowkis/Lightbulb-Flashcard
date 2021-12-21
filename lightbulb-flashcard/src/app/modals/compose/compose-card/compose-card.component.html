@@ -10,9 +10,9 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button color="{{flashcards_Data ? '' : 'medium'}}"
+      <ion-button color="{{flashcards_Data?.length ? '' : 'medium'}}"
         (click)="save()"
-        [disabled]="flashcards_Data == undefined">
+        [disabled]="!flashcards_Data?.length">
         Save
       </ion-button>
     </ion-buttons>
@@ -55,25 +55,25 @@
       </ion-textarea>
     </ion-item>
   </ion-card>
-
-  <ion-card *ngFor="let data of flashcards_Data; let i = index">
-    <ion-item style="position: absolute">
-    <ion-buttons>
-        <ion-button
-          (click)="removeDataBox(i)">
-          <ion-icon name="close-circle"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-item>
-      <ion-textarea
-        autoGrow="true" readonly
-        [value]="data.question">
-      </ion-textarea>
-      <ion-textarea
-        autoGrow="true" readonly
-        [value]="data.answer">
-      </ion-textarea>
-  </ion-card>
+  
+  <div *ngFor="let data of flashcards_Data; let i = index">
+    <ion-buttons style="float:right">
+      <ion-button
+        (click)="removeDataBox(i)">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-card>
+    <ion-textarea
+      autoGrow="true" readonly
+      [value]="data.question">
+    </ion-textarea>
+    <ion-textarea
+      autoGrow="true" readonly
+      [value]="data.answer">
+    </ion-textarea>
+    </ion-card>
+  </div>
 
   <!-- <ion-card>
     <ion-item>
