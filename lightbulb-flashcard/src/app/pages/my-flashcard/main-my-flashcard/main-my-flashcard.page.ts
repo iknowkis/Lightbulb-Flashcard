@@ -1,6 +1,13 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { OverlayEventDetail } from '@ionic/core';
+import { ModalController } from '@ionic/angular';
+
+import { ComposeFlashcardsComponent } from 'src/app/modals/compose/compose-flashcards/compose-flashcards.component';
 import { Flashcards } from 'src/app/shared/models/flashcard.model';
 import { list } from 'src/app/shared/models/item.model';
+
+import { StorageService } from 'src/app/shared/services/storage/storage.service';
+import { UtilService } from 'src/app/shared/services/util/util.service';
 
 @Component({
   selector: 'app-main-my-flashcard',
@@ -11,9 +18,30 @@ export class MainMyFlashcardPage implements OnInit {
 
   @Output() list: Flashcards[];
 
-  constructor() { }
+  constructor(
+    private modalCtrl: ModalController,
+
+    private util: UtilService,
+    private storageService: StorageService,
+  ) { }
 
   ngOnInit() {
-    this.list = list;
+    this.storageService.create();
+    this.getData();
+    // this.list = list;
   }
+
+  async getData() {
+    this.list = await this.storageService.getStorageData();
+  }
+  async openComposeFlashcardsModal() {
+    const modal = await this.modalCtrl.create({
+      component: ComposeFlashcardsComponent,
+    });
+    modal.onDidDismiss().then((saved: OverlayEventDetail) => {
+      if(saved) this.getData();
+    });
+    return modal.present();
+  }
+
 }
