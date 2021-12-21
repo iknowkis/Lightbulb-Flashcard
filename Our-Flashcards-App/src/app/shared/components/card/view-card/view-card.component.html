@@ -1,0 +1,70 @@
+<ion-item>
+  <ion-range
+    min="0"
+    max="{{data.length-1}}"
+    step="1"
+    snaps
+    color="dark"
+    ngDefaultControl
+    [ngModel]="index"
+    (ionChange)="nextByRange(slides, $event)">
+  </ion-range>
+  <ion-buttons>
+    <ion-button>
+      <ion-icon
+      name="{{data[index].learn ? 'checkmark-circle' : 'ellipse-outline'}}"
+      color="{{data[index].learn ? 'primary' : 'dark'}}">
+      </ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-item>
+
+<ion-slides
+  #slides
+  [options]="slideOpts"
+  (ionSlideWillChange)="onSlideWillChange($event)"
+  (ionSlideTap)="onSlideTapped($event)"> <!-- (ionSlideDidChange)="onSlideDidChanged($event)" -->
+  <ion-slide *ngFor="let card of data">
+    <ion-card
+      class="slideCard">
+      <ion-card
+        style="height:20%">
+          <ion-textarea
+            disabled readonly
+            type="text"
+            class="ion-text-center"
+            style="font-size: 20px">
+            <b>{{card.question}}</b>
+          </ion-textarea>
+        </ion-card>
+
+      <ion-item-divider style="height: 10px;"></ion-item-divider>
+
+      <ion-card
+        style="height:75%"
+        color="{{showAnswer||this.tapped ? '' : 'dark'}}">
+        <ion-textarea
+          disabled readonly
+          type="text"
+          class="ion-text-start"
+          style="font-size: 16px"
+          color="{{showAnswer||this.tapped ? '' : 'dark'}}">
+          {{card.answer}}
+        </ion-textarea>
+    </ion-card>
+    </ion-card>
+  </ion-slide>
+</ion-slides>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tab-bar color="dark">
+      <ion-tab-button (click)='next(slides, false)'>
+        <ion-icon name="arrow-undo-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button (click)='next(slides, true)'>
+        <ion-icon name="arrow-redo-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>
