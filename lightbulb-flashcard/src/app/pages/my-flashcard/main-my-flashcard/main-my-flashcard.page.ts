@@ -14,7 +14,7 @@ import { UtilService } from 'src/app/shared/services/util/util.service';
   templateUrl: './main-my-flashcard.page.html',
   styleUrls: ['./main-my-flashcard.page.scss'],
 })
-export class MainMyFlashcardPage implements OnInit {
+export class MainMyFlashcardPage {
 
   @Output() list: Flashcards[];
 
@@ -23,12 +23,12 @@ export class MainMyFlashcardPage implements OnInit {
 
     private util: UtilService,
     private storageService: StorageService,
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.storageService.create();
+  }
+
+  ionViewWillEnter() {
     this.getData();
-    // this.list = list;
   }
 
   async getData() {

@@ -25,6 +25,8 @@ export class UtilService {
 
   async save_CardData(selected: Flashcards, data: Flashcards_Data[], index: number) {
     if (selected.data.length) {
+      data.map(el => selected.data.push(el));
+      this.save_StorageData(selected, index);
       // let match = existingData.filter((existedData)=>existedData == selected).length;
       // match ? existingData.splice(index, match, selected) : existingData.push(selected);
       // this.storageService.set('data', existingData);

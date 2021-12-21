@@ -55,10 +55,12 @@ export class FlashcardsPage {
   }
   async getFlashcards() {
     let data = await this.storageService.getStorageData();
-    this.flashcards = data.filter((item,i) => {
-      this.index = i;
-      return item.id == this.flashcards_id
-    })[0];
+    data.map((item,i) => {
+      if (item.id == this.flashcards_id) {
+        this.index = i;
+        this.flashcards = item;
+      }
+    });
     // this.flashcards = list.filter(item => item.id == this.flashcards_id)[0];
   }
 }
