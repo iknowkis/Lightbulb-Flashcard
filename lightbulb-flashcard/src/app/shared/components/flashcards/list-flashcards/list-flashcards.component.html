@@ -1,12 +1,28 @@
-<ion-card *ngFor="let item of list">
-  <ion-item
-  [routerLink]="['../flashcards',
-  {id: item.id}]">
-    <ion-label>
-      {{item.title}}
-    </ion-label>
-    <ion-badge slot="end" color="light">
-      {{item.data.length}}
-    </ion-badge>
-  </ion-item>
+<ion-card *ngFor="let item of list; let i = index">
+  <ion-list>
+    <ion-item-sliding #slidingItem>
+      <ion-item [routerLink]="['../flashcards', {id: item.id}]">
+        <h2 style="margin: 10px 20px 10px 0px">{{item.icon}}</h2>
+        <ion-label>
+          {{item.title}}
+        </ion-label>
+        <ion-badge slot="end" color="light">
+          {{item.data.length}}
+        </ion-badge>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-button color="dark" (click)="delete(slidingItem, i)">
+          📌
+        </ion-button>
+        <ion-button color="dark" (click)="edit(item, i)">
+          Edit
+        </ion-button>
+      </ion-item-options>
+      <ion-item-options side="end" (ionSwipe)="delete(slidingItem, i)">
+        <ion-button color="danger" (click)="delete(slidingItem, i)">
+          Delete
+        </ion-button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-card>
