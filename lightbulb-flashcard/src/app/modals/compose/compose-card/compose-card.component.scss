@@ -1,0 +1,13 @@
+.cardBox {
+    box-shadow: none;
+}
+ion-content {
+    // overwrite inline styles
+    --overflow: hidden;
+    --offset-bottom: auto!important;
+    overflow: auto;
+    background-color: #fff;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+}

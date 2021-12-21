@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ViewCardComponent } from './view-card.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,6 +13,7 @@ import { ViewCardComponent } from './view-card.component';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
   ],
   exports: [
     ViewCardComponent,
