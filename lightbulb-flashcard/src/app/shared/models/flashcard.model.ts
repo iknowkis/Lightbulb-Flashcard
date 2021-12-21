@@ -1,10 +1,12 @@
 export class Flashcards {
     // liked_post_id_list : Array<string>;
     // followed_id_list: Array<string>;
-    id?: string;
-    title: string;
+    id: string;
     access: boolean;
-    data: Flashcards_Data[];
+    icon?: string;
+    title?: string;
+    tags?: string[];
+    data?: Flashcards_Data[];
 }
 export class Flashcards_Data {
     question: string;

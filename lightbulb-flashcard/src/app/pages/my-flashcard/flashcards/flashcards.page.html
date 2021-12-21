@@ -1,9 +1,5 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="dark">
-    <ion-title
-    color="medium">
-      Flashcards
-    </ion-title>
     <ion-buttons slot="start">
       <ion-back-button color="medium">
       </ion-back-button>
@@ -15,7 +11,8 @@
           color="medium">
         </ion-icon>
       </ion-button>
-      <ion-button>
+      <ion-button
+        (click)="openComposeCardsModal()">
         <ion-icon
           name="add"
           color="medium">
