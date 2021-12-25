@@ -27,20 +27,23 @@ export class ComposeCardComponent {
   ionViewWillEnter() {
   }
 
-  @ViewChild('inputOfQuestion') inputOfQuestion;
+  @ViewChild('textQuestion') textQuestion;
+  @ViewChild('textAnswer') textAnswer;
   addDataBox() {
     if (this.dataBox.question && this.dataBox.answer) {
       if (this.flashcards_Data) this.flashcards_Data.unshift(this.dataBox);
       else this.flashcards_Data = Array(this.dataBox);
       this.dataBox =  initCard();
     }
-    this.inputOfQuestion.setFocus();
+    if (this.dataBox.question=='') this.textQuestion.setFocus();
+    else this.textAnswer.setFocus();
   }
   removeDataBox(i: number) {
     this.flashcards_Data.splice(i,1);
   }
   save() {
-    this.util.save_CardData(this.flashcards, this.flashcards_Data, this.index);
+    if (this.index==undefined) this.util.save_CardData(this.flashcards, this.flashcards_Data);
+    else this.util.edit_CardData(this.flashcards, this.flashcards_Data, this.index);
     this.dismissModal(true);
   }
 

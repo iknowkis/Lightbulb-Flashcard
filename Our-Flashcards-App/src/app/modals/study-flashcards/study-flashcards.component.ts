@@ -1,6 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Flashcards_Data } from 'src/app/shared/models/flashcard.model';
+import { Flashcards, Flashcards_Data } from 'src/app/shared/models/flashcard.model';
 
 @Component({
   selector: 'app-study-flashcards',
@@ -8,7 +8,8 @@ import { Flashcards_Data } from 'src/app/shared/models/flashcard.model';
   styleUrls: ['./study-flashcards.component.scss'],
 })
 export class StudyFlashcardsComponent {
-  @Output() data: Flashcards_Data[];
+  @Output() list: Flashcards_Data[];
+  @Output() flashcards: Flashcards;
   @Output() index: number;
   @Output() slideOpts: any;
   @Output() showAnswer = false;
