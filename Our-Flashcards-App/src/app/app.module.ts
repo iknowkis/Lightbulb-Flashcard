@@ -9,6 +9,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainPageModule } from './pages/main/main.module';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +24,10 @@ import { MainPageModule } from './pages/main/main.module';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     MainPageModule,
+
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule.enablePersistence({experimentalForceOwningTab:true}),
+
   ],
   providers: [{
       provide: RouteReuseStrategy,

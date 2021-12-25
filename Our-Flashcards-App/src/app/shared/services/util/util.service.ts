@@ -20,6 +20,7 @@ export class UtilService {
       let index = await this.getIndex(existingData, data);
       let match = existingData.filter(existedData=>existedData.id == data.id).length;
       match ? existingData.splice(index, match, data) : existingData.push(data);
+      // match ? this.dbService.updatePost(data, data.data, data.id) : this.dbService.addPost(data);
       this.storageService.set('data', existingData);
     }
     else this.storageService.set('data', Array(data));
