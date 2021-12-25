@@ -10,7 +10,7 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button color="{{flashcards_Data?.length ? '' : 'medium'}}"
+      <ion-button [color]="flashcards_Data?.length ? '' : 'medium'"
         (click)="save()"
         [disabled]="!flashcards_Data?.length">
         Save
@@ -34,9 +34,10 @@
         position="floating">
         Question
       </ion-label>
-      <ion-textarea class="ion-text-start"
-        type="text" #inputOfQuestion
-        rows="1" autoGrow="true"
+      <ion-textarea class="ion-text-start" type="text"
+        #textQuestion  (ionFocus)="textQuestion.autoGrow=true"
+        [rows]="index==undefined ? 1 : 6"
+        [autoGrow]="index==undefined ? true : false"
         [(ngModel)]="dataBox.question">
       </ion-textarea>
     </ion-item>
@@ -48,9 +49,10 @@
         position="floating">
         Answer
       </ion-label>
-      <ion-textarea class="ion-text-start"
-        type="text"
-        rows="2" autoGrow="true"
+      <ion-textarea class="ion-text-start" type="text"
+        #textAnswer (ionFocus)="textAnswer.autoGrow=true"
+        [rows]="index==undefined ? 2 : 12"
+        [autoGrow]="index==undefined ? true : false"
         [(ngModel)]="dataBox.answer">
       </ion-textarea>
     </ion-item>
@@ -74,21 +76,4 @@
     </ion-textarea>
     </ion-card>
   </div>
-
-  <!-- <ion-card>
-    <ion-item>
-      <ion-label>
-        Access
-      </ion-label>
-      <ion-select
-        interface="action-sheet"
-        [(ngModel)]="flashcards.access">
-        <ion-select-option
-          *ngFor="let access of flashcards_item.access"
-          [value]="access.value">
-          {{access.name}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-card> -->
 </ion-content>
