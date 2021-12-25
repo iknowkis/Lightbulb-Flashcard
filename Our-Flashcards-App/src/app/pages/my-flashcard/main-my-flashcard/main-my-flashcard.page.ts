@@ -39,7 +39,7 @@ export class MainMyFlashcardPage {
       component: ComposeFlashcardsComponent,
     });
     modal.onDidDismiss().then((saved: OverlayEventDetail) => {
-      if(saved) this.getData();
+      if(saved.data) this.getData();
     });
     return modal.present();
   }

@@ -7,6 +7,7 @@ import { Flashcards } from 'src/app/shared/models/flashcard.model';
 import { list } from 'src/app/shared/models/item.model';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 import { UtilService } from 'src/app/shared/services/util/util.service';
+import { AlertService } from 'src/app/shared/services/alert/alert.service';
 
 @Component({
   selector: 'app-flashcards',
@@ -22,7 +23,7 @@ export class FlashcardsPage {
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
 
-    private util: UtilService,
+    private alert: AlertService,
     private storageService: StorageService,
     ) {
       this.initData();
@@ -36,11 +37,10 @@ export class FlashcardsPage {
       component: ComposeCardComponent,
       componentProps: {
         flashcards: this.flashcards,
-        index: this.index,
       }
     });
     modal.onDidDismiss().then((saved: OverlayEventDetail) => {
-      if(saved) this.getFlashcards();
+      if(saved.data) this.getFlashcards();
     });
     return modal.present();
   }
@@ -62,5 +62,12 @@ export class FlashcardsPage {
       }
     });
     // this.flashcards = list.filter(item => item.id == this.flashcards_id)[0];
+  }
+
+  checkOffAll() {
+    this.alert.checkOff_CardData(this.flashcards)
+      .then(result => {
+        if (result) this.flashcards = result
+      });
   }
 }
