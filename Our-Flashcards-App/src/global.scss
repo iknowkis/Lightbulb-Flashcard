@@ -40,3 +40,9 @@
 //         position: absolute;
 //     }
 // }
+ion-textarea {
+    min-height: 42px;
+    textarea {
+        min-height: 42px;
+    }
+}

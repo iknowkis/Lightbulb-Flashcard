@@ -7,14 +7,14 @@
           {{item.title}}
         </ion-text>
         <ion-badge slot="end" color="light">
-          {{item.data.length}}
+          {{getLearnedLenth(item.data) | json}} / {{item.data.length}}
         </ion-badge>
       </ion-item>
       <ion-item-options side="start">
         <ion-button color="dark" (click)="delete(slidingItem, i)">
           📌
         </ion-button>
-        <ion-button color="dark" (click)="edit(item, i)">
+        <ion-button color="dark" (click)="edit(slidingItem, item, i)">
           Edit
         </ion-button>
       </ion-item-options>

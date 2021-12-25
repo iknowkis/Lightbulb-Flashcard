@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core';
 import { ComposeFlashcardsComponent } from 'src/app/modals/compose/compose-flashcards/compose-flashcards.component';
 import { MainMyFlashcardPage } from 'src/app/pages/my-flashcard/main-my-flashcard/main-my-flashcard.page';
-import { Flashcards } from 'src/app/shared/models/flashcard.model';
+import { Flashcards, Flashcards_Data } from 'src/app/shared/models/flashcard.model';
 import { AlertService } from 'src/app/shared/services/alert/alert.service';
 
 @Component({
@@ -22,16 +22,16 @@ export class ListFlashcardsComponent {
     private alert: AlertService,
   ) { }
 
-  async edit(flashcards: Flashcards, index: number) {
+  async edit(slidingItem:any, flashcards: Flashcards, index: number) {
+    slidingItem.close();
     const modal = await this.modalCtrl.create({
       component: ComposeFlashcardsComponent,
       componentProps: {
         flashcards: flashcards,
-        index: index,
       }
     });
     modal.onDidDismiss().then((saved: OverlayEventDetail) => {
-      if(saved) this.mainFlashcards.getData();
+      this.mainFlashcards.getData();
     });
     return modal.present();
   }
@@ -44,5 +44,10 @@ export class ListFlashcardsComponent {
         if(result) this.list = result;
         slidingItem.close();
       });
+  }
+
+  getLearnedLenth(data: Flashcards_Data[]) {
+    let learnedLength = data.filter(card => card.learn == true).length;
+    return learnedLength ? learnedLength : 0;
   }
 }

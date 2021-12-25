@@ -5,12 +5,19 @@
       </ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button
+        (click)="checkOffAll()">
+        <ion-icon
+        name="reload-outline"
+        color="medium">
+        </ion-icon>
+      </ion-button>
+      <!-- <ion-button>
         <ion-icon
           name="ellipsis-horizontal-circle-outline"
           color="medium">
         </ion-icon>
-      </ion-button>
+      </ion-button> -->
       <ion-button
         (click)="openComposeCardsModal()">
         <ion-icon
@@ -25,5 +32,8 @@
 <ion-content>
   <app-view-flashcards [flashcards]="flashcards"></app-view-flashcards>
   <ion-item-divider></ion-item-divider>
-  <app-list-card [data]="flashcards?.data"></app-list-card>
+  <app-list-card
+    [flashcards]="flashcards"
+    [list]="flashcards?.data">
+  </app-list-card>
 </ion-content>

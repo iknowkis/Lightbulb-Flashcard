@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Flashcards } from 'src/app/shared/models/flashcard.model';
 import { Flashcards_item, initFlashcards } from 'src/app/shared/models/item.model';
+import { DbService } from 'src/app/shared/services/db/db.service';
 
 import { UtilService } from 'src/app/shared/services/util/util.service';
 
@@ -14,7 +15,6 @@ export class ComposeFlashcardsComponent {
 
   flashcards: Flashcards;
   tagInput: string;
-  index: number;
 
   constructor(
     private modalCtrl: ModalController,
@@ -42,7 +42,7 @@ export class ComposeFlashcardsComponent {
   }
 
   save() {
-    this.util.save_StorageData(this.flashcards, this.index);
+    this.util.save_StorageData(this.flashcards);
     this.dismissModal(true);
   }
 
