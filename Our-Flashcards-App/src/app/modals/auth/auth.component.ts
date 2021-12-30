@@ -1,14 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { Account } from 'src/app/shared/models/flashcard.model';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
 
-  constructor() { }
+  authValue: Account;
+  showPassword: boolean = false;
 
-  ngOnInit() {}
+  constructor(
+    private modalCtrl: ModalController,
 
+    private auth: AuthService,
+  ) {
+  }
+  ionViewWillEnter() {
+  }
+
+  updateDbAccount() {
+    this.auth.getAuthValue()
+      .then((account: Account) => {
+        this.auth.updateAccount(account.id, this.authValue);
+    });
+    this.dismissModal();
+  }
+
+  showHide() {
+    this.showPassword = !this.showPassword;
+  }
+  dismissModal() {
+    this.modalCtrl.dismiss();
+  }
 }
