@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ExplorePage } from './explore.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ExplorePage
+    redirectTo: 'main-explore',
+    pathMatch: 'full'
+  },
+  {
+    path: 'main-explore',
+    loadChildren: () => import('./main-explore/main-explore.module').then( m => m.MainExplorePageModule)
+  },
+  {
+    path: 'flashcards',
+    loadChildren: () => import('../my-flashcard/flashcards/flashcards.module').then( m => m.FlashcardsPageModule)
   }
 ];
 
