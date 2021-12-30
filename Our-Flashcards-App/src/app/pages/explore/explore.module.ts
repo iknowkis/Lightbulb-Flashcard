@@ -9,12 +9,14 @@ import { ExplorePageRoutingModule } from './explore-routing.module';
 import { ExplorePage } from './explore.page';
 
 @NgModule({
+  declarations: [
+    ExplorePage,
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ExplorePageRoutingModule
   ],
-  declarations: [ExplorePage]
 })
 export class ExplorePageModule {}

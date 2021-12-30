@@ -1,0 +1,57 @@
+<!-- <ion-card *ngFor="let item of dbPosts">
+  <ion-list>
+    <ion-row>
+        post_id: {{item.post_id}}
+    </ion-row>
+    <ion-row>
+        id: {{item.id}}
+    </ion-row>
+    <ion-row>
+      title: {{item.title}}
+    </ion-row>
+    <ion-row>
+      tags: {{item.tags}}
+    </ion-row>
+    <ion-row>
+      data: {{item.data | json}}
+    </ion-row>
+    <ion-row>
+      number_liked: {{item.number_liked}}
+    </ion-row>
+    <ion-row>
+      number_archived: {{item.number_archived}}
+    </ion-row>
+  </ion-list>
+</ion-card> -->
+
+<ion-card *ngFor="let item of dbPosts" [routerLink]="['../flashcards', {id: item.post_id}]">
+  <ion-item>
+    <ion-col>
+      <ion-text>
+        <b>{{item.title}}</b>
+      </ion-text>
+    </ion-col>
+  </ion-item>
+  <ion-item>
+    <ion-col>
+      <ion-badge color="light" style="height:24px"
+        *ngFor="let tag of item.tags; let i = index">
+        <ion-label style="font-size:11px">
+          <b>#{{tag}}</b>
+        </ion-label>
+      </ion-badge>
+    </ion-col>
+    <div slot="end">
+      <ion-row>
+        <ion-badge color="light">
+          {{item.data.length}} Cards
+        </ion-badge>
+      </ion-row>
+      <ion-row>
+        <ion-badge color="light">
+          <ion-text color="danger">{{item.number_liked}} Likes</ion-text>
+        </ion-badge>
+      </ion-row>
+    </div>
+  </ion-item>
+</ion-card>
