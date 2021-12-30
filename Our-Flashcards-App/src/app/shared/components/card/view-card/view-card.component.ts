@@ -14,6 +14,7 @@ export class ViewCardComponent {
   @Input() index: number;
   @Input() slideOpts: any;
   @Input() showAnswer: boolean;
+  @Input() isLocal: boolean;
   tapped = false;
   constructor(
     private util: UtilService,
@@ -45,6 +46,6 @@ export class ViewCardComponent {
   checkLearn(index: number) {
     this.list[index].learn = !this.list[index].learn;
     this.flashcards.data = this.list;
-    this.util.save_StorageData(this.flashcards);
+    if (this.isLocal) this.util.save_StorageData(this.flashcards);
   }
 }

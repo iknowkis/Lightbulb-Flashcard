@@ -1,13 +1,12 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { OverlayEventDetail } from '@ionic/core';
 import { ModalController } from '@ionic/angular';
 
 import { ComposeFlashcardsComponent } from 'src/app/modals/compose/compose-flashcards/compose-flashcards.component';
 import { Flashcards } from 'src/app/shared/models/flashcard.model';
-import { list } from 'src/app/shared/models/item.model';
 
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
-import { UtilService } from 'src/app/shared/services/util/util.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-main-my-flashcard',
@@ -21,10 +20,11 @@ export class MainMyFlashcardPage {
   constructor(
     private modalCtrl: ModalController,
 
-    private util: UtilService,
+    private auth: AuthService,
     private storageService: StorageService,
   ) {
     this.storageService.create();
+    this.auth.initAuth();
   }
 
   ionViewWillEnter() {
@@ -38,8 +38,8 @@ export class MainMyFlashcardPage {
     const modal = await this.modalCtrl.create({
       component: ComposeFlashcardsComponent,
     });
-    modal.onDidDismiss().then((saved: OverlayEventDetail) => {
-      if(saved.data) this.getData();
+    modal.onDidDismiss().then(async (saved: OverlayEventDetail) => {
+      if(saved.data) await this.getData();
     });
     return modal.present();
   }

@@ -14,7 +14,7 @@
           (click)="checkLearn(i)">
         </ion-icon>
       </ion-item>
-      <ion-item-options side="start">
+      <ion-item-options side="start" *ngIf="isLocal">
         <ion-button color="dark">
           📌
         </ion-button>
@@ -22,7 +22,7 @@
           Edit
         </ion-button>
       </ion-item-options>
-      <ion-item-options (ionSwipe)="delete(slidingItem, i)">
+      <ion-item-options side="end" *ngIf="isLocal" (ionSwipe)="delete(slidingItem, i)">
         <ion-button color="danger" (click)="delete(slidingItem, i)">
           Delete
         </ion-button>

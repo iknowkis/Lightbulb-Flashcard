@@ -4,7 +4,6 @@ import { OverlayEventDetail } from '@ionic/core';
 import { ModalController } from '@ionic/angular';
 import { ComposeCardComponent } from 'src/app/modals/compose/compose-card/compose-card.component';
 import { Flashcards } from 'src/app/shared/models/flashcard.model';
-import { list } from 'src/app/shared/models/item.model';
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 import { UtilService } from 'src/app/shared/services/util/util.service';
 import { AlertService } from 'src/app/shared/services/alert/alert.service';
@@ -17,12 +16,13 @@ import { AlertService } from 'src/app/shared/services/alert/alert.service';
 export class FlashcardsPage {
   @Output() flashcards_id: string; // Received from main-my-flashcards.page, list-flashcards
   @Output() flashcards: Flashcards;
-  index: number;
+  @Output() isLocal: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
 
+    private util: UtilService,
     private alert: AlertService,
     private storageService: StorageService,
     ) {
@@ -55,13 +55,20 @@ export class FlashcardsPage {
   }
   async getFlashcards() {
     let data = await this.storageService.getStorageData();
-    data.map((item,i) => {
-      if (item.id == this.flashcards_id) {
-        this.index = i;
-        this.flashcards = item;
-      }
-    });
-    // this.flashcards = list.filter(item => item.id == this.flashcards_id)[0];
+    if (data) {
+      data.map(item => {
+        if (item.id == this.flashcards_id) {
+          this.flashcards = item;
+          this.isLocal = true;
+        }
+      });
+    }
+
+    if (this.flashcards==undefined) {
+      let exlore_data = await this.util.getSelectedPost(this.flashcards_id);
+      this.flashcards = exlore_data as any;
+      this.flashcards.data.map(card => card.learn=false);
+    }
   }
 
   checkOffAll() {

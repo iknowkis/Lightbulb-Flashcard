@@ -13,6 +13,7 @@ export class StudyFlashcardsComponent {
   @Output() index: number;
   @Output() slideOpts: any;
   @Output() showAnswer = false;
+  @Output() isLocal: boolean;
 
   constructor(
     private modalCtrl: ModalController,

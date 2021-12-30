@@ -4,7 +4,7 @@
       <ion-back-button color="medium">
       </ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons *ngIf="isLocal" slot="end">
       <ion-button
         (click)="checkOffAll()">
         <ion-icon
@@ -34,6 +34,7 @@
   <ion-item-divider></ion-item-divider>
   <app-list-card
     [flashcards]="flashcards"
-    [list]="flashcards?.data">
+    [list]="flashcards?.data"
+    [isLocal]="isLocal">
   </app-list-card>
 </ion-content>
