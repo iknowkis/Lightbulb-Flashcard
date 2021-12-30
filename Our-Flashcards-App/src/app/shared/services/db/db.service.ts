@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Flashcards, Flashcards_Data } from '../../models/flashcard.model';
+import { Account, Flashcards, Flashcards_Data } from '../../models/flashcard.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +21,19 @@ export class DbService {
   // getSelectedAccount(id: string){
   //   return this.dbAccounts.doc(id).valueChanges();
   // }
-  // addAccount(account: Account){
-  //   this.dbAccounts.add({
-  //     name: account.name,
-  //     password: account.password,
-  //   });
-  // }
-  // updateAccount(id: string, account: Account){
-  //   this.dbAccounts.doc(id).update({...{
-  //     name: account.name,
-  //     password: account.password,
-  //   },
-  //   });
-  // }
+  addAccount(account: Account){
+    this.dbAccounts.add({
+      name: account.name,
+      password: account.password,
+    });
+  }
+  updateAccount(id: string, account: Account){
+    this.dbAccounts.doc(id).update({...{
+      name: account.name,
+      password: account.password,
+    },
+    });
+  }
 
   getPosts() {
     return this.dbPosts.snapshotChanges();
@@ -43,23 +43,26 @@ export class DbService {
   }
   addPost(flashcards: Flashcards){
     this.dbPosts.add({
+      id: flashcards.id,
       title: flashcards.title,
       tags: flashcards.tags,
-      // writer_id: account_id,
       number_liked: 0,
       number_archived: 0,
       data: flashcards.data,
       // date: serverTimestamp(),
+      // writer_id: account_id,
     });
   }
-  updatePost(flashcards: Flashcards, list_flashcards_Data: Flashcards_Data[], post_id: string){
+  updatePost(post_id: string, flashcards: Flashcards, list_flashcards_Data: Flashcards_Data[]){
     this.dbPosts.doc(post_id).update({...{
-      post_title: flashcards.title,
+      title: flashcards.title,
       tags: flashcards.tags,
-      // post_content: content,
       data: list_flashcards_Data,
       // date: serverTimestamp(),
       }
     });
+  }
+  deletePost(post_id: string) {
+    this.dbPosts.doc(post_id).delete();
   }
 }

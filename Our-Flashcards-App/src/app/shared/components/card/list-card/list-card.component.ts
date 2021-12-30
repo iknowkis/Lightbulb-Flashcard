@@ -17,6 +17,7 @@ export class ListCardComponent {
 
   @Input() flashcards: Flashcards;
   @Input() list: Flashcards_Data[];
+  @Input() isLocal: boolean;
 
   constructor(
     private modalCtrl: ModalController,
@@ -34,6 +35,7 @@ export class ListCardComponent {
         list: this.list,
         flashcards: this.flashcards,
         index: i,
+        isLocal: this.isLocal,
         slideOpts: {
           initialSlide: i,
           speed: 400,
@@ -75,6 +77,6 @@ export class ListCardComponent {
   checkLearn(index: number) {
     this.list[index].learn = !this.list[index].learn;
     this.flashcards.data = this.list;
-    this.util.save_StorageData(this.flashcards);
+    if (this.isLocal) this.util.save_StorageData(this.flashcards);
   }
 }
