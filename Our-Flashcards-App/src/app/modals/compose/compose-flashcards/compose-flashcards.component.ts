@@ -15,6 +15,7 @@ export class ComposeFlashcardsComponent {
 
   flashcards: Flashcards;
   tagInput: string;
+  isEmojiPickerVisible: boolean;
 
   constructor(
     private modalCtrl: ModalController,
@@ -28,6 +29,11 @@ export class ComposeFlashcardsComponent {
 
   ionViewWillEnter() {
   }
+
+  addEmoji(event) {
+    this.flashcards.icon = `${event.emoji.native}`;
+    this.isEmojiPickerVisible = false;
+ }
 
   @ViewChild('inputOfTag') inputOfTag;
   addTag() {

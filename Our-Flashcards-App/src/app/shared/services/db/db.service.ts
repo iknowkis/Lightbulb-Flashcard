@@ -44,6 +44,8 @@ export class DbService {
   addPost(flashcards: Flashcards){
     this.dbPosts.add({
       id: flashcards.id,
+      access: flashcards.access,
+      icon: flashcards.icon,
       title: flashcards.title,
       tags: flashcards.tags,
       number_liked: 0,
@@ -55,6 +57,7 @@ export class DbService {
   }
   updatePost(post_id: string, flashcards: Flashcards, list_flashcards_Data: Flashcards_Data[]){
     this.dbPosts.doc(post_id).update({...{
+      icon: flashcards.icon,
       title: flashcards.title,
       tags: flashcards.tags,
       data: list_flashcards_Data,

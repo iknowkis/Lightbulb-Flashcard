@@ -21,8 +21,18 @@
 
 <ion-content>
   <ion-item lines="none">
-    <h1>{{flashcards.icon}}</h1>
+    <h1 (click)="isEmojiPickerVisible = !isEmojiPickerVisible">
+      {{flashcards.icon}}
+    </h1>
   </ion-item>
+  <emoji-mart
+    class="emoji-mart"
+    [style]="{width:'98%'}"
+    *ngIf="isEmojiPickerVisible"
+    (emojiSelect)="addEmoji($event)"
+    [showPreview]="false"
+    title="Choose your emoji">
+  </emoji-mart>
 
   <ion-card>
     <ion-item>

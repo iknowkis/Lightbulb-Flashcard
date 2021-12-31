@@ -10,6 +10,7 @@ import { ListFlashcardsModule } from 'src/app/shared/components/flashcards/list-
 import { ComposeFlashcardsComponent } from 'src/app/modals/compose/compose-flashcards/compose-flashcards.component';
 import { Flashcards_item } from 'src/app/shared/models/item.model';
 import { Flashcards } from 'src/app/shared/models/flashcard.model';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { Flashcards } from 'src/app/shared/models/flashcard.model';
     IonicModule,
     MainMyFlashcardPageRoutingModule,
     ListFlashcardsModule,
+    PickerModule,
   ],
   providers: [
     Flashcards_item,

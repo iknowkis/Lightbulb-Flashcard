@@ -1,29 +1,3 @@
-<!-- <ion-card *ngFor="let item of dbPosts">
-  <ion-list>
-    <ion-row>
-        post_id: {{item.post_id}}
-    </ion-row>
-    <ion-row>
-        id: {{item.id}}
-    </ion-row>
-    <ion-row>
-      title: {{item.title}}
-    </ion-row>
-    <ion-row>
-      tags: {{item.tags}}
-    </ion-row>
-    <ion-row>
-      data: {{item.data | json}}
-    </ion-row>
-    <ion-row>
-      number_liked: {{item.number_liked}}
-    </ion-row>
-    <ion-row>
-      number_archived: {{item.number_archived}}
-    </ion-row>
-  </ion-list>
-</ion-card> -->
-
 <ion-card *ngFor="let item of dbPosts" [routerLink]="['../flashcards', {id: item.post_id}]">
   <ion-item>
     <ion-col>
