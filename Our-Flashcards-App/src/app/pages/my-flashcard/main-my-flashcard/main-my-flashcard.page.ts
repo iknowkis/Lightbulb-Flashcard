@@ -7,6 +7,7 @@ import { Flashcards } from 'src/app/shared/models/flashcard.model';
 
 import { StorageService } from 'src/app/shared/services/storage/storage.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { MainTabBarComponent } from 'src/app/shared/components/main-tab-bar/main-tab-bar.component';
 
 @Component({
   selector: 'app-main-my-flashcard',
@@ -19,11 +20,11 @@ export class MainMyFlashcardPage {
 
   constructor(
     private modalCtrl: ModalController,
-
+    private tabBar: MainTabBarComponent,
+    
     private auth: AuthService,
     private storageService: StorageService,
   ) {
-    this.storageService.create();
     this.auth.initAuth();
   }
 
@@ -39,7 +40,10 @@ export class MainMyFlashcardPage {
       component: ComposeFlashcardsComponent,
     });
     modal.onDidDismiss().then(async (saved: OverlayEventDetail) => {
-      if(saved.data) await this.getData();
+      if(saved.data) {
+        await this.getData();
+        await this.tabBar.getData(this.list.length);
+      }
     });
     return modal.present();
   }

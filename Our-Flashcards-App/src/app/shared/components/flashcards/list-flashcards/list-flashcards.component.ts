@@ -5,6 +5,7 @@ import { ComposeFlashcardsComponent } from 'src/app/modals/compose/compose-flash
 import { MainMyFlashcardPage } from 'src/app/pages/my-flashcard/main-my-flashcard/main-my-flashcard.page';
 import { Flashcards, Flashcards_Data } from 'src/app/shared/models/flashcard.model';
 import { AlertService } from 'src/app/shared/services/alert/alert.service';
+import { MainTabBarComponent } from '../../main-tab-bar/main-tab-bar.component';
 
 @Component({
   selector: 'app-list-flashcards',
@@ -17,6 +18,7 @@ export class ListFlashcardsComponent {
 
   constructor(
     private modalCtrl: ModalController,
+    private tabBar: MainTabBarComponent,
     private mainFlashcards: MainMyFlashcardPage,
 
     private alert: AlertService,
@@ -41,7 +43,10 @@ export class ListFlashcardsComponent {
   delete(slidingItem:any, index: number) {
     this.alert.delete_StorageData(this.list, index)
       .then(result => {
-        if(result) this.list = result;
+        if(result) {
+          this.list = result;
+          this.tabBar.getData(result.length);
+        }
         slidingItem.close();
       });
   }
