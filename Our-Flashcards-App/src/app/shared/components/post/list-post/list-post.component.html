@@ -1,4 +1,6 @@
-<ion-card *ngFor="let item of dbPosts" [routerLink]="['../flashcards', {id: item.post_id}]">
+<ion-card
+  *ngFor="let item of dbPosts"
+  [routerLink]="['../flashcards', {id: item.post_id}]">
   <ion-item>
     <ion-col>
       <ion-text>
@@ -6,26 +8,29 @@
       </ion-text>
     </ion-col>
   </ion-item>
-  <ion-item>
+  <ion-item style="height:3em">
     <ion-col>
-      <ion-badge color="light" style="height:24px"
+      <ion-badge color="light"
         *ngFor="let tag of item.tags; let i = index">
         <ion-label style="font-size:11px">
           <b>#{{tag}}</b>
         </ion-label>
       </ion-badge>
     </ion-col>
+  </ion-item>
+  <ion-item style="height:35px">
+    <div slot="start">
+      <ion-badge color="light">
+        <ion-text color="danger">
+          <ion-icon name="heart"></ion-icon>
+          {{item.number_liked}}
+        </ion-text>
+      </ion-badge>
+    </div>
     <div slot="end">
-      <ion-row>
-        <ion-badge color="light">
+      <ion-badge color="light">
           {{item.data.length}} Cards
-        </ion-badge>
-      </ion-row>
-      <ion-row>
-        <ion-badge color="light">
-          <ion-text color="danger">{{item.number_liked}} Likes</ion-text>
-        </ion-badge>
-      </ion-row>
+      </ion-badge>
     </div>
   </ion-item>
 </ion-card>
