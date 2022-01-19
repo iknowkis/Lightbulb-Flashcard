@@ -10,6 +10,7 @@ import { UtilService } from 'src/app/shared/services/util/util.service';
 export class MainExplorePage {
 
   @Output() dbPosts: any;
+  search: any;
 
   constructor(
     private util: UtilService,
@@ -19,9 +20,20 @@ export class MainExplorePage {
   }
 
   getDbPosts() {
-    this.dbService.getPosts().subscribe(watch => {
-      this.util.getPosts()
+    this.dbService.getPosts().subscribe(async watch => {
+      let arr = [];
+      await this.util.getPosts()
         .then(posts=> this.dbPosts = posts);
-    })
+      arr = await this.dbPosts.filter(post => post.title.match(new RegExp(this.search, "i")));
+      await this.dbPosts.map(post => {
+        if (post.tags.map(tag => tag.match(new RegExp(this.search, "i")) ? arr.push(post): 0))
+        return arr;
+      });
+      this.dbPosts = [...new Set(arr)];
+    });
+  }
+
+  searchPosts() {
+    this.getDbPosts();
   }
 }

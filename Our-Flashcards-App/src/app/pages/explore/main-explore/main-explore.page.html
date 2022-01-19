@@ -2,7 +2,11 @@
   <ion-toolbar color="dark">
     <ion-title>
       <ion-card>
-        <ion-input placeholder="Search" clearInput>
+        <ion-input
+          clearInput
+          placeholder="Search"
+          [(ngModel)]="search"
+          (ngModelChange)="searchPosts()">
         </ion-input>
       </ion-card>
     </ion-title>
