@@ -41,8 +41,8 @@ export class MainMyFlashcardPage {
     });
     modal.onDidDismiss().then(async (saved: OverlayEventDetail) => {
       if(saved.data) {
-        await this.getData();
-        await this.tabBar.getData(this.list.length);
+        await this.getData()
+        .then(() => this.tabBar.getData(this.list.length));
       }
     });
     return modal.present();
